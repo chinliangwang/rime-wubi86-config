@@ -7,9 +7,10 @@ patch:
   # 输入法方案列表
   schema_list:
     - schema: wubi86               # 五笔86版
-    - schema: qqwb                 # QQ五笔86版
-    - schema: wubi86_gb18030       # 五笔86版，支持GB18030字符集
-    - schema: wubi_pinyin          # 五笔拼音混合输入法
+#    - schema: qqwb                 # QQ五笔86版
+    - schema: wubi86_gb18030       # 五笔86版，GB18030大字集
+    - schema: wubi86_super         # 五笔86版，CJK超大字集
+#    - schema: wubi_pinyin          # 五笔拼音混合输入法
     - schema: wubi_trad            # 五笔繁体中文输入法
 
   # 输入法切换器配置
