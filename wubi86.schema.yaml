@@ -3,7 +3,7 @@
 
 schema:
   schema_id: wubi86                                  # 方案ID：五笔86
-  name: "五笔·经典"                                    # 方案名称
+  name: "经典词库"                                    # 方案名称
   version: "0.21"                                    # 版本号
   author:                                            # 作者信息
     - 發明人 王永民先生
