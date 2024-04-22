@@ -3,7 +3,7 @@
 
 schema:
   schema_id: wubi86                                  # 方案ID：五笔86
-  name: "经典词库"                                    # 方案名称
+  name: "经典"                                       # 方案名称
   version: "0.21"                                    # 版本号
   author:                                            # 作者信息
     - 發明人 王永民先生
@@ -14,16 +14,16 @@ schema:
   dependencies:                                      # 依赖其他方案或库
     - pinyin_simp
 
-switches:                                            # 开关设置
-  - name: ascii_mode                                 # ASCII模式开关
-    reset: 0                                         # 默认状态 (0: 中文)
-    states: [ 中文, 西文 ]                            # 状态选项
-  - name: full_shape                                 # 全角/半角开关
-    states: [ 半角, 全角 ]                            # 状态选项
-  - name: extended_charset                           # 字符集扩展开关
-    states: [ 常用, 增廣 ]                            # 状态选项
-  - name: ascii_punct                                # ASCII标点开关
-    states: [ 。，, ．， ]                             # 状态选项
+#switches:                                            # 开关设置
+#  - name: ascii_mode                                 # ASCII模式开关
+#    reset: 0                                         # 默认状态 (0: 中文)
+#    states: [ 中文, 西文 ]                            # 状态选项
+#  - name: full_shape                                 # 全角/半角开关
+#    states: [ 半角, 全角 ]                            # 状态选项
+#  - name: extended_charset                           # 字符集扩展开关
+#    states: [ 常用, 增廣 ]                            # 状态选项
+#  - name: ascii_punct                                # ASCII标点开关
+#    states: [ 。，, ．， ]                             # 状态选项
 
 engine:                                               # 引擎配置
   processors:                                        # 处理器

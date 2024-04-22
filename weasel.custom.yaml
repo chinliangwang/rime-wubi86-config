@@ -1,7 +1,24 @@
 patch:
-  style:
-    color_scheme: flypy
-    horizontal: true      # 候選橫排
-    inline_preedit: true  # 內嵌編碼（僅支持 TSF）
-    display_tray_icon: true  # 顯示托盤圖標
-    font_point: 12
+  style/horizontal: true
+  style/inline_preedit: true
+  style/color_scheme: soak
+  style/layout/min_width: 80
+  style/layout/margin_x: 8
+  style/layout/margin_y: 8
+  style/layout/candidate_spacing: 24
+  preset_color_schemes:
+    soak:
+      name: 幽能／Psionics
+      author: 雨過之後、佛振
+      text_color: 12763842
+      back_color: 4473924
+      border_color: 4473924
+      label_color: 11908533
+      hilited_text_color: 15658734
+      hilited_back_color: 4473924
+      candidate_text_color: 8421504
+      comment_text_color: 8421504
+      hilited_candidate_text_color: 16448250
+      hilited_comment_text_color: 16448250
+      hilited_candidate_back_color: 4473924
+      hilited_label_color: 15658734
