@@ -20,4 +20,10 @@ patch:
   speller/auto_select: true                              # 自动上屏，当唯一候选时自动选择
   speller/auto_select_unique_candidate: true             # 无重码自动上屏，当无重复候选词时自动选择
   speller/auto_clear: max_length                         # 达到最大编码长度时自动清除
+
+  punctuator:
+   full_shape:
+     __include: punctuation:/full_shape  # 引入全角标点的配置
+   half_shape:
+     __include: punctuation:/half_shape  # 引入半角标点的配置
   
