@@ -26,10 +26,4 @@ patch:
     - lua_translator@time_translator
     - lua_translator@date_translator
     - lua_translator@week_translator
-
-  punctuator:
-   full_shape:
-     __include: punctuation:/full_shape  # 引入全角标点的配置
-   half_shape:
-     __include: punctuation:/half_shape  # 引入半角标点的配置
   

@@ -34,14 +34,7 @@ patch:
 
   # 菜单配置
   menu:
-    page_size: 5                   # 设置菜单每页显示的候选项数量
-
-  #标点符号配置
-  punctuator:
-   full_shape:
-     __include: punctuation:/full_shape  # 引入全角标点的配置
-   half_shape:
-     __include: punctuation:/half_shape  # 引入半角标点的配置
+    page_size: 5                   # 设置菜单每页显示的候选项数量  
 
   # 键绑定配置
   key_binder:
