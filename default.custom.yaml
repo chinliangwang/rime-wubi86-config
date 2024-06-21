@@ -1,17 +1,12 @@
 # Rime default settings
 # encoding: utf-8
 
-config_version: '0.1.0'
+config_version: '0.1.1'
 
 patch:
   # 输入法方案列表
   schema_list:
     - schema: wubi86               # 五笔86版
-    - schema: qqwb                 # QQ五笔86版
-#    - schema: wubi86_gb18030       # 五笔86版，GB18030大字集
-#    - schema: wubi86_super         # 五笔86版，CJK超大字集
-#    - schema: wubi_pinyin          # 五笔拼音混合输入法
-    - schema: wubi_trad            # 五笔繁体中文输入法
 
   # 输入法切换器配置
   switcher:
@@ -19,48 +14,7 @@ patch:
     hotkeys:                       # 定义热键用于切换输入法
       - Control+grave              # Ctrl + `
       - Control+Shift+grave        # Ctrl + Shift + `
-      - F4                         # F4键
-    save_options:                  # 定义切换输入法时需要保存的选项
-      - full_shape                 # 全角/半角形式
-      - ascii_punct                # ASCII标点
-      - simplification             # 简化字
-      - extended_charset           # 扩展字符集
-      - zh_hant                    # 繁体中文
-      - zh_hans                    # 简体中文
-      - zh_hant_tw                 # 台湾繁体中文
-    fold_options: true             # 启用选项折叠
-    abbreviate_options: true       # 启用选项缩写
-    option_list_separator: '／'    # 选项列表的分隔符
 
   # 菜单配置
   menu:
     page_size: 5                   # 设置菜单每页显示的候选项数量  
-
-  # 键绑定配置
-  key_binder:
-    bindings:
-      __patch:
-        - key_bindings:/emacs_editing         # 引入模仿 Emacs 编辑方式的键绑定
-        - key_bindings:/move_by_word_with_tab # 使用 Tab 键在文本中按词移动
-        - key_bindings:/paging_with_minus_equal # 使用 '-' 和 '=' 实现翻页
-        - key_bindings:/paging_with_comma_period # 使用 ',' 和 '.' 实现翻页
-        - key_bindings:/numbered_mode_switch   # 切换到带编号的模式
-
-  # 识别器配置
-  recognizer:
-    patterns:
-      email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"  # 定义电子邮件地址的模式
-      uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"  # 定义大写字母开头的单词模式
-      url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"  # 定义网址的模式
-
-  # ASCII 组合键配置
-  ascii_composer:
-    good_old_caps_lock: true                 # 启用传统大写锁定键行为
-    switch_key:
-      Shift_L: inline_ascii                  # 左 Shift 切换到内联 ASCII 模式
-      Shift_R: commit_text                   # 右 Shift 提交文本
-      Control_L: noop                        # 左 Control 无操作
-      Control_R: noop                        # 右 Control 无操作
-      Caps_Lock: clear                       # Caps Lock 清除输入
-      Eisu_toggle: clear                     # Eisu 切换键清除输入
-
