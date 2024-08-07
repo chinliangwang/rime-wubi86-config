@@ -1,0 +1,83 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: wubi86                                  # 方案ID：五笔86
+  name: "经典"                                       # 方案名称
+  version: "0.21"                                    # 版本号
+  author:                                            # 作者信息
+    - 發明人 王永民先生
+  description: |                                     # 方案描述
+    五筆字型86版
+    碼表源自 ibus-table
+    敲 z 鍵進入拼音反查
+  dependencies:                                      # 依赖其他方案或库
+    - pinyin_simp
+
+#switches:                                            # 开关设置
+#  - name: ascii_mode                                 # ASCII模式开关
+#    reset: 0                                         # 默认状态 (0: 中文)
+#    states: [ 中文, 西文 ]                            # 状态选项
+#  - name: full_shape                                 # 全角/半角开关
+#    states: [ 半角, 全角 ]                            # 状态选项
+#  - name: extended_charset                           # 字符集扩展开关
+#    states: [ 常用, 增廣 ]                            # 状态选项
+#  - name: ascii_punct                                # ASCII标点开关
+#    states: [ 。，, ．， ]                             # 状态选项
+
+engine:                                               # 引擎配置
+  processors:                                        # 处理器
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:                                         # 分段器
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:                                        # 翻译器
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+
+speller:                                              # 拼写器配置
+  delimiter: " ;'"                                    # 分隔符设置
+  #max_code_length: 4                                # 最大编码长度（已注释）
+
+translator:                                           # 翻译器配置
+  dictionary: wubi86_jian                                  # 使用的字典
+  enable_charset_filter: true                         # 启用字符集过滤
+  enable_sentence: true                               # 启用句子模式
+  enable_encoder: true                                # 启用编码器
+  encode_commit_history: true                         # 启用提交历史编码
+  max_phrase_length: 4                                # 最大短语长度
+  disable_user_dict_for_patterns:                     # 禁用用户词典的模式
+    - "^z.*$"                                         # 对以 'z' 开头的编码不使用用户词典
+
+reverse_lookup:                                       # 反查配置
+  dictionary: pinyin_simp                             # 使用的字典
+  prefix: "z"                                         # 前缀
+  suffix: "'"                                         # 后缀
+  tips: 〔拼音〕                                         # 提示信息
+  preedit_format:                                     # 编辑格式
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+
+punctuator:                                           # 标点符号配置
+  import_preset: symbols                              # 导入预设符号
+
+key_binder:                                           # 键绑定器配置
+  import_preset: default                              # 导入默认设置
+
+recognizer:                                           # 识别器配置
+  import_preset: default                              # 导入默认设置
+  patterns:                                           # 模式
+    punct: '^/([0-9]0?|[A-Za-z]+)$'                   # 标点模式
+    reverse_lookup: "^z[a-z]*'?$"                     # 反查模式
