@@ -25,3 +25,7 @@ wubi86.userdb/LOG
 wubi86.userdb/LOG.old
 wubi86.userdb/MANIFEST-000007
 build/weasel.yaml
+build/wubi86_jian.prism.bin
+build/wubi86_jian.reverse.bin
+build/wubi86_jian.schema.yaml
+build/wubi86_jian.table.bin
