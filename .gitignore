@@ -1,0 +1,13 @@
+
+build/default.yaml
+build/pinyin_simp.prism.bin
+build/pinyin_simp.reverse.bin
+build/pinyin_simp.schema.yaml
+build/pinyin_simp.table.bin
+build/squirrel.yaml
+build/wubi86.prism.bin
+build/wubi86.reverse.bin
+build/wubi86.schema.yaml
+build/wubi86.table.bin
+installation.yaml
+user.yaml
