@@ -1,54 +1,62 @@
-# Rime default settings
-# encoding: utf-8
+# Rime 默认设置
+# 文件编码：utf-8
 
-config_version: '0.1.1'
+config_version: '0.1.2'  # 配置文件版本号
 
 patch:
   # 输入法方案列表
   schema_list:
-    - schema: wubi86               # 五笔86版
+    - schema: wubi86  # 五笔86版输入法方案
 
+  # 样式配置
   style:
-    color_scheme: apathy 
+    color_scheme: apathy  # 设定配色方案为 'apathy'
 
   # 输入法切换器配置
   switcher:
-    # caption: 〔方案選單〕           # 切换器标题
-    hotkeys:                       # 定义热键用于切换输入法
-      - Control+grave              # Ctrl + `
-      - Control+Shift+grave        # Ctrl + Shift + `
+    # caption: 〔方案選單〕  # 输入法方案菜单标题（可选）
+    hotkeys:  # 定义用于切换输入法方案的快捷键
+      - Control+grave  # Ctrl + ` 切换方案
+      - Control+Shift+grave  # Ctrl + Shift + ` 切换方案
 
   # 菜单配置
   menu:
-    page_size: 5                   # 设置菜单每页显示的候选项数量
-  
-  # # 引用 symbols.yaml 文件的所有符号配置
-  # symbols:
-  #   __include: symbols
- 
-  # # 引用自定义符号映射文件
-  # punctuator:
-  #   full_shape:
-  #     __include: symbols.custom:/full_shape  # 引用自定义文件中的全角配置
-  #   half_shape:
-  #     __include: symbols.custom:/half_shape  # 引用自定义文件中的半角配置
+    page_size: 5  # 设置候选词菜单每页显示的候选项数量
 
+  # ASCII 输入模式配置
   ascii_composer:
-    good_old_caps_lock: true
-    switch_key:
-      Shift_L: commit_code
-      Shift_R: commit_code
-      Control_L: noop
-      Control_R: noop
-      Caps_Lock: clear
-      Eisu_toggle: clear
+    good_old_caps_lock: true  # 启用传统 Caps Lock 功能
+    switch_key:  # 定义特殊按键行为
+      Shift_L: commit_code  # 左 Shift 键提交编码
+      Shift_R: commit_code  # 右 Shift 键提交编码
+      Control_L: noop  # 左 Ctrl 键无操作
+      Control_R: noop  # 右 Ctrl 键无操作
+      Caps_Lock: clear  # 清除 Caps Lock 功能
+      Eisu_toggle: clear  # 清除 Eisu_toggle 功能
 
+  # 按键绑定设置
   key_binder:
     bindings:
-      __patch:
-        - key_bindings:/emacs_editing
-        - key_bindings:/move_by_word_with_tab
-        - key_bindings:/paging_with_minus_equal
-        - key_bindings:/paging_with_comma_period
-        - key_bindings:/numbered_mode_switch
-        - key_bindings:/custom_candidate_selection   # 引用自定义候选词选择绑定
+      __patch:  # 添加或覆盖键绑定配置
+        - key_bindings:/emacs_editing  # 引入 Emacs 风格编辑键绑定
+        - key_bindings:/move_by_word_with_tab  # 使用 Tab 键按词移动光标
+        - key_bindings:/paging_with_minus_equal  # 使用减号和等号键翻页
+        - key_bindings:/paging_with_comma_period  # 使用逗号和句号键翻页
+        - key_bindings:/numbered_mode_switch  # 使用数字键切换输入模式
+        - key_bindings:/custom_candidate_selection  # 引入自定义候选词选择键绑定
+
+  # Emoji 提示功能配置
+  switches/@next:
+    name: emoji_suggestion  # 定义开关名称，用于控制 Emoji 提示功能
+    reset: 1  # 切换输入方案时重置此开关状态
+    states: [ "🈚︎", "🈶️" ]  # 定义开关的状态：关闭 (🈚︎) 和开启 (🈶️)
+
+  'engine/filters/@before 0':  # 在过滤器列表首位插入 Emoji 过滤器
+    simplifier@emoji_suggestion
+
+  # Emoji 过滤器的具体设置
+  emoji_suggestion:
+    opencc_config: opencc/emoji.json  # 使用 emoji.json 配置文件定义的字符到 Emoji 的转换规则
+    option_name: emoji_suggestion  # 关联开关名称，与 switches 配置相对应
+    tips: none  # 提示信息类型（none 表示不显示提示信息）
+    inherit_comment: false  # 是否继承候选词的注释（false 表示不继承）
