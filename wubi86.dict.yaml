@@ -5,7 +5,7 @@
 #码表来源：https://www.icesofts.com/download.html 微软经典词库86版
 ---
 name: wubi86
-version: "0.7"
+version: "0.2.0"
 sort: by_weight
 columns:
   - text

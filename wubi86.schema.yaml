@@ -3,27 +3,30 @@
 
 schema:
   schema_id: wubi86                                  # 方案ID：五笔86
-  name: "五笔·经典"                                    # 方案名称
+  name: "五笔字型"                                       # 方案名称
   version: "0.21"                                    # 版本号
   author:                                            # 作者信息
     - 發明人 王永民先生
   description: |                                     # 方案描述
     五筆字型86版
-    碼表源自 ibus-table
     敲 z 鍵進入拼音反查
   dependencies:                                      # 依赖其他方案或库
     - pinyin_simp
 
-switches:                                            # 开关设置
-  - name: ascii_mode                                 # ASCII模式开关
-    reset: 0                                         # 默认状态 (0: 中文)
-    states: [ 中文, 西文 ]                            # 状态选项
-  - name: full_shape                                 # 全角/半角开关
-    states: [ 半角, 全角 ]                            # 状态选项
-  - name: extended_charset                           # 字符集扩展开关
-    states: [ 常用, 增廣 ]                            # 状态选项
-  - name: ascii_punct                                # ASCII标点开关
-    states: [ 。，, ．， ]                             # 状态选项
+switches:
+  # - name: ascii_mode
+  #   reset: 0
+  #   states: [ 中, En ]
+  - name: zh_trad
+    reset: 0    # 初始状态为 0: 简 -> 简 1: 简 -> 繁
+    states: [ 简体, 繁体 ]
+  # - name: full_shape
+  #   states: [ 半角, 全角 ]
+  # - name: extended_charset
+  #   states: [ 常用, 扩展 ]
+  # - name: ascii_punct
+  #   states: [ 。，, ．， ]
+
 
 engine:                                               # 引擎配置
   processors:                                        # 处理器
@@ -45,20 +48,47 @@ engine:                                               # 引擎配置
     - punct_translator
     - reverse_lookup_translator
     - table_translator
+    - lua_translator@*date_translator                 # 日期、时间、星期
+    - history_translator@repeat_last_input # 重复上一次输入，对应下面的 repeat_last_input
+  filters:
+    - simplifier@tradition
+#    - lua_filter@*single_char_first_filter # 单字优先
+#    - lua_filter@*single_char_only         # 纯单字
 
-speller:                                              # 拼写器配置
-  delimiter: " ;'"                                    # 分隔符设置
-  #max_code_length: 4                                # 最大编码长度（已注释）
+# 拼写器配置
+speller:
+  max_code_length: 4                             # 四码上屏，设置最大编码长度为 4
+  auto_select: true                              # 自动上屏，当唯一候选时自动选择
+  auto_select_unique_candidate: true             # 无重码自动上屏，当无重复候选词时自动选择
+  auto_clear: max_length                         # 达到最大编码长度时自动清除
 
 translator:                                           # 翻译器配置
   dictionary: wubi86                                  # 使用的字典
   enable_charset_filter: true                         # 启用字符集过滤
-  enable_sentence: true                               # 启用句子模式
+  enable_completion: false                            # 是否显示编码未输入完整的词条
+  enable_user_dict: false                             # 禁用用户词典
+  enable_sentence: false                              # 启用句子模式
   enable_encoder: true                                # 启用编码器
   encode_commit_history: true                         # 启用提交历史编码
   max_phrase_length: 4                                # 最大短语长度
   disable_user_dict_for_patterns:                     # 禁用用户词典的模式
     - "^z.*$"                                         # 对以 'z' 开头的编码不使用用户词典
+
+# 简入繁出 通过 OpenCC 支持 github地址：https://github.com/BYVoid/OpenCC
+# 已集成在输入法程序中，在输入法程序目录的 opencc 目录下
+# 输入法程序中使用 OpenCC 简转繁的过程是这样：
+# 1. 先从简转繁体
+# 2. 如果配置了台湾繁体，就会将上一步生成的繁体进一步处理
+# 3. 根据这个文件：https://github.com/BYVoid/OpenCC/blob/master/data/dictionary/TWVariants.txt 把台湾与正常繁体不同的地方转成台湾版本的字，比如 “床”
+tradition:
+  #  opencc_config: s2t.json  # 简 -> 繁
+  opencc_config: s2hk.json  # 繁 -> 香港
+  #  opencc_config: t2s.json   # 繁 -> 简
+  #  opencc_config: t2tw.json  # 繁 -> 台湾
+  #  opencc_config: t2hk.json  # 繁 -> 香港
+  #  opencc_config: s2tw.json  # 簡 -> 臺灣標準
+  #  opencc_config: s2twp.json  # 簡 -> 臺灣片語
+  option_name: zh_trad
 
 reverse_lookup:                                       # 反查配置
   dictionary: pinyin_simp                             # 使用的字典
@@ -81,3 +111,9 @@ recognizer:                                           # 识别器配置
   patterns:                                           # 模式
     punct: '^/([0-9]0?|[A-Za-z]+)$'                   # 标点模式
     reverse_lookup: "^z[a-z]*'?$"                     # 反查模式
+
+# 重复上一次输入
+repeat_last_input:
+  input: z
+  size: 1
+  initial_quality: 1

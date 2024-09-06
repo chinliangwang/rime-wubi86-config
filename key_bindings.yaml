@@ -1,75 +1,72 @@
 # Rime key bindings
 # encoding: utf-8
 
-# Emacs 编辑风格键绑定集
 emacs_editing:
   __append:
-    - { when: composing, accept: Control+p, send: Up }  # 编辑时，Ctrl+P模拟上箭头键
-    - { when: composing, accept: Control+n, send: Down }  # 编辑时，Ctrl+N模拟下箭头键
-    - { when: composing, accept: Control+b, send: Left }  # 编辑时，Ctrl+B模拟左箭头键
-    - { when: composing, accept: Control+f, send: Right }  # 编辑时，Ctrl+F模拟右箭头键
-    - { when: composing, accept: Control+a, send: Home }  # 编辑时，Ctrl+A模拟Home键
-    - { when: composing, accept: Control+e, send: End }  # 编辑时，Ctrl+E模拟End键
-    - { when: composing, accept: Control+d, send: Delete }  # 编辑时，Ctrl+D模拟Delete键
-    - { when: composing, accept: Control+k, send: Shift+Delete }  # 编辑时，Ctrl+K执行Shift+Delete操作
-    - { when: composing, accept: Control+h, send: BackSpace }  # 编辑时，Ctrl+H模拟BackSpace键
-    - { when: composing, accept: Control+g, send: Escape }  # 编辑时，Ctrl+G模拟Escape键
-    - { when: composing, accept: Control+bracketleft, send: Escape }  # 编辑时，Ctrl+[模拟Escape键
-    - { when: composing, accept: Control+y, send: Page_Up }  # 编辑时，Ctrl+Y模拟Page_Up键
-    - { when: composing, accept: Alt+v, send: Page_Up }  # 编辑时，Alt+V模拟Page_Up键
-    - { when: composing, accept: Control+v, send: Page_Down } # 编辑时，Ctrl+V模拟Page_Down键
+    - { when: composing, accept: Control+p, send: Up }
+    - { when: composing, accept: Control+n, send: Down }
+    - { when: composing, accept: Control+b, send: Left }
+    - { when: composing, accept: Control+f, send: Right }
+    - { when: composing, accept: Control+a, send: Home }
+    - { when: composing, accept: Control+e, send: End }
+    - { when: composing, accept: Control+d, send: Delete }
+    - { when: composing, accept: Control+k, send: Shift+Delete }
+    - { when: composing, accept: Control+h, send: BackSpace }
+    - { when: composing, accept: Control+g, send: Escape }
+    - { when: composing, accept: Control+bracketleft, send: Escape }
+    - { when: composing, accept: Control+y, send: Page_Up }
+    - { when: composing, accept: Alt+v, send: Page_Up }
+    - { when: composing, accept: Control+v, send: Page_Down }
 
-# 使用 Tab 按键在词间移动的键绑定集
 move_by_word_with_tab:
   __append:
-    - { when: composing, accept: ISO_Left_Tab, send: Shift+Left }  # 编辑时，ISO_Left_Tab（通常是 Shift+Tab）模拟 Shift+Left 键，向左移动一个词
-    - { when: composing, accept: Shift+Tab, send: Shift+Left }  # 编辑时，Shift+Tab 模拟 Shift+Left 键，向左移动一个词
-    - { when: composing, accept: Tab, send: Shift+Right }  # 编辑时，Tab 模拟 Shift+Right 键，向右移动一个词
-  
-# 使用 - 和 = 进行翻页的键绑定集  
+    - { when: composing, accept: ISO_Left_Tab, send: Shift+Left }
+    - { when: composing, accept: Shift+Tab, send: Shift+Left }
+    - { when: composing, accept: Tab, send: Shift+Right }
+
 paging_with_minus_equal:
   __append:
-    - { when: has_menu, accept: minus, send: Page_Up }  # 当有菜单时，按 `-` 键模拟 Page_Up 键，实现向上翻页
-    - { when: has_menu, accept: equal, send: Page_Down }  # 当有菜单时，按 `=` 键模拟 Page_Down 键，实现向下翻页
+    - { when: has_menu, accept: minus, send: Page_Up }
+    - { when: has_menu, accept: equal, send: Page_Down }
 
-# 使用逗号和句号进行翻页的键绑定集
 paging_with_comma_period:
   __append:
-    - { when: paging, accept: comma, send: Page_Up }            # 当可以翻页时，逗号键用于向上翻页
-    - { when: has_menu, accept: period, send: Page_Down }       # 当有菜单时，句号键用于向下翻页
+    - { when: paging, accept: comma, send: Page_Up }
+    - { when: has_menu, accept: period, send: Page_Down }
 
-# 使用方括号进行翻页的键绑定集
 paging_with_brackets:
   __append:
-    - { when: paging, accept: bracketleft, send: Page_Up }      # 当可以翻页时，左方括号键用于向上翻页
-    - { when: has_menu, accept: bracketright, send: Page_Down } # 当有菜单时，右方括号键用于向下翻页
+    - { when: paging, accept: bracketleft, send: Page_Up }
+    - { when: has_menu, accept: bracketright, send: Page_Down }
 
-# 切换输入模式的键绑定集
 numbered_mode_switch:
   __append:
-    - { when: always, accept: Control+Shift+1, select: .next }         # 任何时候，Ctrl+Shift+1 切换到下一个输入模式
-    - { when: always, accept: Control+Shift+2, toggle: ascii_mode }    # 任何时候，Ctrl+Shift+2 切换 ASCII 模式
-    - { when: always, accept: Control+Shift+3, toggle: full_shape }    # 任何时候，Ctrl+Shift+3 切换全/半角模式
-    - { when: always, accept: Control+Shift+4, toggle: simplification } # 任何时候，Ctrl+Shift+4 切换简繁体
-    - { when: always, accept: Control+Shift+5, toggle: extended_charset } # 任何时候，Ctrl+Shift+5 切换字符集扩展
-    - { when: always, accept: Control+Shift+exclam, select: .next } # 任何时候，Ctrl+Shift+! 切换到下一个输入模式
-    - { when: always, accept: Control+Shift+at, toggle: ascii_mode } # 任何时候，Ctrl+Shift+@ 切换 ASCII 模式
-    - { when: always, accept: Control+Shift+numbersign, toggle: full_shape } # 任何时候，Ctrl+Shift+# 切换全/半角模式
-    - { when: always, accept: Control+Shift+dollar, toggle: simplification } # 任何时候，Ctrl+Shift+$ 切换简繁体
-    - { when: always, accept: Control+Shift+percent, toggle: extended_charset } # 任何时候，Ctrl+Shift+% 切换字符集扩展
+    - { when: always, accept: Control+Shift+1, select: .next }
+    - { when: always, accept: Control+Shift+2, toggle: ascii_mode }
+    - { when: always, accept: Control+Shift+3, toggle: full_shape }
+    - { when: always, accept: Control+Shift+4, toggle: simplification }
+    - { when: always, accept: Control+Shift+5, toggle: extended_charset }
+    - { when: always, accept: Control+Shift+exclam, select: .next }
+    - { when: always, accept: Control+Shift+at, toggle: ascii_mode }
+    - { when: always, accept: Control+Shift+numbersign, toggle: full_shape }
+    - { when: always, accept: Control+Shift+dollar, toggle: simplification }
+    - { when: always, accept: Control+Shift+percent, toggle: extended_charset }
 
-# Windows 兼容模式切换键绑定集
 windows_compatible_mode_switch:
   __append:
-    - { when: always, accept: Shift+space, toggle: full_shape }    # 任何时候，Shift+Space 切换全/半角模式
-    - { when: always, accept: Control+period, toggle: ascii_punct } # 任何时候，Ctrl+. 切换 ASCII 标点
+    - { when: always, accept: Shift+space, toggle: full_shape }
+    - { when: always, accept: Control+period, toggle: ascii_punct }
 
-# 优化模式切换键绑定集
 optimized_mode_switch:
   __append:
-    - { when: always, accept: Control+Shift+space, select: .next }   # 任何时候，Ctrl+Shift+Space 切换到下一个输入模式
-    - { when: always, accept: Shift+space, toggle: ascii_mode }      # 任何时候，Shift+Space 切换 ASCII 模式
-    - { when: always, accept: Control+comma, toggle: full_shape }    # 任何时候，Ctrl+, 切换全/半角模式
-    - { when: always, accept: Control+period, toggle: ascii_punct }  # 任何时候，Ctrl+. 切换 ASCII 标点
-    - {when: always, accept: Control+slash, toggle: simplification } # 任何时候，Ctrl+/ 切换简繁体
-    - { when: always, accept: Control+backslash, toggle: extended_charset } # 任何时候，Ctrl+\ 切换字符集扩展
+    - { when: always, accept: Control+Shift+space, select: .next }
+    - { when: always, accept: Shift+space, toggle: ascii_mode }
+    - { when: always, accept: Control+comma, toggle: full_shape }
+    - { when: always, accept: Control+period, toggle: ascii_punct }
+    - { when: always, accept: Control+slash, toggle: simplification }
+    - { when: always, accept: Control+backslash, toggle: extended_charset }
+
+custom_candidate_selection:
+  __append:
+    - { when: has_menu, accept: semicolon, send: "2" }    # 候选2 用分号
+    - { when: has_menu, accept: apostrophe, send: "3" }   # 候选3 用单引号
